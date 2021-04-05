@@ -22,3 +22,7 @@ ng add @angular/material
 ## 项目包结构
 
 ## 技术细节
+1. 添加组件
+```bash
+ng generate component componentName
+```
