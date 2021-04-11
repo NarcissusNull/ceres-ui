@@ -11,8 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AntdModule } from '../antd.module';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { SearchComponent } from './search/search.component';
+import { ToolbarComponent } from './compoments/toolbar/toolbar.component';
+import { SearchComponent } from './compoments/search/search.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 registerLocaleData(zh);
 
@@ -20,7 +25,12 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     ToolbarComponent,
-    SearchComponent
+    SearchComponent,
+    HomePageComponent,
+    SearchPageComponent,
+    LoginPageComponent,
+    UserPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,

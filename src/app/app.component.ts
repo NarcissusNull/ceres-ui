@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'store-ui';
-  array = [1, 2, 3, 4];
 }

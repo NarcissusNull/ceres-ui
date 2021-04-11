@@ -1,0 +1,41 @@
+.inner-layout {
+    margin-top: 74px;
+    width: 70%;
+    min-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+  }
+  
+  .inner-content {
+    width: 620px;
+    height: 600px;
+    background-color: aquamarine;
+  }
+  
+  [nz-carousel-content] {
+    padding: 20;
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    background: #364d79;
+    color: #fff;
+    overflow: hidden;
+  }
+  nz-carousel {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 600px;
+    width: 620px;
+  }
+  
+  h3 {
+    color: #fff;
+    margin-bottom: 0;
+  }
+  
+  .sider-menu {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  
