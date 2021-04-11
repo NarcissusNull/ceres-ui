@@ -1,0 +1,64 @@
+<nz-layout class="inner-layout">
+  <nz-sider nzWidth="190px" nzTheme="light">
+    <ul nz-menu nzMode="vertical" class="sider-menu">
+      <li nz-submenu nzTitle="Navigation One">
+        <ul>
+          <li nz-menu-group nzTitle="Item 1">
+            <ul>
+              <li nz-menu-item>Option 1</li>
+              <li nz-menu-item>Option 2</li>
+            </ul>
+          </li>
+          <li nz-menu-group nzTitle="Item 2">
+            <ul>
+              <li nz-menu-item>Option 3</li>
+              <li nz-menu-item>Option 4</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="subnav 2" nzIcon="laptop"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+      <li nz-submenu nzTitle="subnav 3" nzIcon="notification"></li>
+    </ul>
+  </nz-sider>
+  <nz-carousel class="inner-content" nzAutoPlay>
+    <div nz-carousel-content *ngFor="let index of array">
+      <h3>{{ index }}</h3>
+    </div>
+  </nz-carousel>
+  <div class="imgs">
+    <img
+      class="img1"
+      nz-image
+      width="200px"
+      height="194px"
+      nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+      alt=""
+    />
+    <img
+      class="img2"
+      nz-image
+      width="200px"
+      height="194px"
+      nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+      alt=""
+    />
+    <img
+      class="img3"
+      nz-image
+      width="200px"
+      height="194px"
+      nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+      alt=""
+    />
+  </div>
+</nz-layout>

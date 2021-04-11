@@ -18,6 +18,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RecommendComponent } from './compoments/recommend/recommend.component';
 
 registerLocaleData(zh);
 
@@ -30,7 +31,8 @@ registerLocaleData(zh);
     SearchPageComponent,
     LoginPageComponent,
     UserPageComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    RecommendComponent
   ],
   imports: [
     BrowserModule,
