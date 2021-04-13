@@ -19,6 +19,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RecommendComponent } from './compoments/recommend/recommend.component';
+import { HotProductComponent } from './compoments/hot-product/hot-product.component';
 
 registerLocaleData(zh);
 
@@ -32,7 +33,8 @@ registerLocaleData(zh);
     LoginPageComponent,
     UserPageComponent,
     AdminPageComponent,
-    RecommendComponent
+    RecommendComponent,
+    HotProductComponent
   ],
   imports: [
     BrowserModule,

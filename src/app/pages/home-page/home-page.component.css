@@ -1,5 +1,4 @@
 :host {
-  height: calc(100% - 74px);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -10,4 +9,5 @@
 .home-content {
   width: 1050px;
   height: 100%;
+  min-height: 2000px;
 }
