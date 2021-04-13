@@ -1,15 +1,17 @@
 .hot-border {
     margin-top: 20px;
+    position: absolute;
 }
-.img2 {
-    margin-left: 25px;
+
+:host {
+    width: 100%;
 }
-.img3 {
-    margin-left: 25px;
+
+.gutter-row {
+    min-width: 196px;
 }
-.img4 {
-    margin-left: 25px;
-}
-.img5 {
-    margin-left: 25px;
+
+.recommend-bottom {
+    margin-top: 10px;
+    margin-left: 9px;
 }
