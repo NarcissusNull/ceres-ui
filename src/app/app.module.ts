@@ -20,6 +20,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RecommendComponent } from './compoments/recommend/recommend.component';
 import { HotProductComponent } from './compoments/hot-product/hot-product.component';
+import { RelatedProductListComponent } from './compoments/related-product-list/related-product-list.component';
 
 registerLocaleData(zh);
 
@@ -34,7 +35,8 @@ registerLocaleData(zh);
     UserPageComponent,
     AdminPageComponent,
     RecommendComponent,
-    HotProductComponent
+    HotProductComponent,
+    RelatedProductListComponent
   ],
   imports: [
     BrowserModule,
