@@ -21,6 +21,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RecommendComponent } from './compoments/recommend/recommend.component';
 import { HotProductComponent } from './compoments/hot-product/hot-product.component';
 import { RelatedProductListComponent } from './compoments/related-product-list/related-product-list.component';
+import { ProductListComponent } from './compoments/product-list/product-list.component';
 
 registerLocaleData(zh);
 
@@ -36,7 +37,8 @@ registerLocaleData(zh);
     AdminPageComponent,
     RecommendComponent,
     HotProductComponent,
-    RelatedProductListComponent
+    RelatedProductListComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
