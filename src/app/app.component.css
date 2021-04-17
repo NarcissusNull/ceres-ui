@@ -1,0 +1,12 @@
+.home-content {
+  width: 1098px;
+  height: 100%;
+  min-height: 2000px;
+}
+.conent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 74px;
+}
