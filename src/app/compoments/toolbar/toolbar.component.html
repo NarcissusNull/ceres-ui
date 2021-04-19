@@ -6,7 +6,8 @@
     [nzIcon]="'user'"
   ></nz-avatar>
   <app-search></app-search>
-  <button class="shopping-cart" nz-button nzType="primary" nzShape="round">
+  <button class="shopping-cart" nz-button nzType="primary" nzShape="round" (click)="open()">
     <i nz-icon nzType="shopping-cart"></i>购物车
   </button>
 </nz-header>
+<app-shopping-cart [visible]="visible" (close)="close()"></app-shopping-cart>

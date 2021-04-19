@@ -1,0 +1,26 @@
+<nz-drawer [nzWidth]="500" [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="购物车" (nzOnClose)="onClose()">
+  <nz-list nzItemLayout="vertical">
+    <nz-list-item *ngFor="let item of data">
+      <nz-list-item-meta>
+        <nz-list-item-meta-title>
+          <a href="{{ item.href }}">{{ item.title }}</a>
+        </nz-list-item-meta-title>
+        <nz-list-item-meta-description>
+          {{ item.description }}
+        </nz-list-item-meta-description>
+      </nz-list-item-meta>
+      {{ item.content }}
+      <ul nz-list-item-actions>
+        <nz-list-item-action>    <nz-button-group>
+          <button nz-button (click)="decline()"><i nz-icon nzType="minus"></i></button>
+          <input type="text" nz-input [maxLength]="2"/>
+          <button nz-button (click)="increase()"><i nz-icon nzType="plus"></i></button>
+        </nz-button-group></nz-list-item-action>
+        <nz-list-item-action><i nz-icon nzType="star-o" style="margin-right: 8px;"></i> 2</nz-list-item-action>
+      </ul>
+      <nz-list-item-extra>
+        <img width="100" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+      </nz-list-item-extra>
+    </nz-list-item>
+  </nz-list>
+</nz-drawer>
