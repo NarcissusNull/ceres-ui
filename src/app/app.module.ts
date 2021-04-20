@@ -23,6 +23,7 @@ import { HotProductComponent } from './compoments/hot-product/hot-product.compon
 import { RelatedProductListComponent } from './compoments/related-product-list/related-product-list.component';
 import { ProductListComponent } from './compoments/product-list/product-list.component';
 import { ShoppingCartComponent } from './compoments/shopping-cart/shopping-cart.component';
+import { ProductDetailPageComponent } from './pages/product-detail-page/product-detail-page.component';
 
 registerLocaleData(zh);
 
@@ -40,7 +41,8 @@ registerLocaleData(zh);
     HotProductComponent,
     RelatedProductListComponent,
     ProductListComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ProductDetailPageComponent
   ],
   imports: [
     BrowserModule,
