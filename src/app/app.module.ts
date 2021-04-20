@@ -25,6 +25,7 @@ import { ProductListComponent } from './compoments/product-list/product-list.com
 import { ShoppingCartComponent } from './compoments/shopping-cart/shopping-cart.component';
 import { ProductDetailPageComponent } from './pages/product-detail-page/product-detail-page.component';
 import { DetailHeaderComponent } from './compoments/detail-header/detail-header.component';
+import { DetailContentComponent } from './compoments/detail-content/detail-content.component';
 
 registerLocaleData(zh);
 
@@ -44,7 +45,8 @@ registerLocaleData(zh);
     ProductListComponent,
     ShoppingCartComponent,
     ProductDetailPageComponent,
-    DetailHeaderComponent
+    DetailHeaderComponent,
+    DetailContentComponent
   ],
   imports: [
     BrowserModule,
