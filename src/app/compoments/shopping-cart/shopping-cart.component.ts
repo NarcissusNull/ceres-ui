@@ -3,7 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd/message';
 const count = 5;
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
-
+interface ItemData {
+  href: string;
+  title: string;
+  avatar: string;
+  description: string;
+  content: string;
+}
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -13,41 +19,17 @@ export class ShoppingCartComponent implements OnInit {
   @Input()
   visible!: boolean;
 
-  // tslint:disable-next-line:no-output-on-prefix
   @Output()
   close: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private http: HttpClient, private msg: NzMessageService) { }
 
-  initLoading = true;
-  loadingMore = false;
-  data: any[] = [];
+  data: ItemData[] = [];
   list: Array<{ loading: boolean; name: any }> = [];
   percent = 0;
 
   ngOnInit(): void {
-    this.getData((res: any) => {
-      this.data = res.results;
-      this.list = res.results;
-      this.initLoading = false;
-    });
-  }
-  getData(callback: (res: any) => void): void {
-    this.http.get(fakeDataUrl).subscribe((res: any) => callback(res));
-  }
-
-  onLoadMore(): void {
-    this.loadingMore = true;
-    this.list = this.data.concat([...Array(count)].fill({}).map(() => ({ loading: true, name: {} })));
-    this.http.get(fakeDataUrl).subscribe((res: any) => {
-      this.data = this.data.concat(res.results);
-      this.list = [...this.data];
-      this.loadingMore = false;
-    });
-  }
-
-  edit(item: any): void {
-    this.msg.success(item.email);
+    this.loadData(1);
   }
 
   increase(): void {
@@ -66,5 +48,19 @@ export class ShoppingCartComponent implements OnInit {
 
   onClose(): void {
     this.close.emit();
+  }
+
+  loadData(pi: number): void {
+    this.data = new Array(50).fill({}).map((_, index) => {
+      return {
+        href: 'http://ant.design',
+        title: `ant design part ${index} (page: ${pi})`,
+        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+        content:
+          'We supply a series of design principles, practical patterns and high quality design resources ' +
+          '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.'
+      };
+    });
   }
 }
