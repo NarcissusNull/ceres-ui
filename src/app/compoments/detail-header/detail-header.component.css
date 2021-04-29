@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    justify-content: top;
+    align-items: top;
+}
+
+.price {
+    margin-left: 20px;
+}
+
+.price p {
+    font-size: large;
+}
