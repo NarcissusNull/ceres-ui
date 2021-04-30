@@ -6,7 +6,6 @@
   nzTitle="添加新商品"
   [nzFooter]="null"
   (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
 >
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
@@ -32,14 +31,13 @@
             formControlName="type"
             nzPlaceHolder="选择一个类别"
           >
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
+            <nz-option *ngFor="let type of types" [nzValue]="type.id" [nzLabel]="type.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control [nzSpan]="12" [nzOffset]="5">
-          <button nz-button nzType="primary">Submit</button>
+          <button nz-button nzType="primary">新增</button>
         </nz-form-control>
       </nz-form-item>
     </form>
@@ -53,7 +51,7 @@
         >
           <div>
             <i nz-icon nzType="plus"></i>
-            <div style="margin-top: 8px">Upload</div>
+            <div style="margin-top: 8px">上传</div>
           </div>
         </nz-upload>
         <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">

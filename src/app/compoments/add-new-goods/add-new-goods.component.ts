@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import * as _ from 'lodash';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
+import Type from 'src/app/domain/type.domin';
 import { HttpService } from 'src/app/service/http.service';
 
 @Component({
@@ -20,6 +20,8 @@ export class AddNewGoodsComponent implements OnInit {
   isVisible = false;
   validateForm!: FormGroup;
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
+  types: Type[] = [];
+
   constructor(private fb: FormBuilder, private httpService: HttpService) {}
 
   ngOnInit(): void {
@@ -28,14 +30,14 @@ export class AddNewGoodsComponent implements OnInit {
       price: [null, [Validators.required]],
       type: [null, [Validators.required]],
     });
+
+    this.httpService.queryTypes().subscribe((data) => {
+      this.types = data;
+    });
   }
 
   showModal(): void {
     this.isVisible = true;
-  }
-
-  handleOk(): void {
-    this.isVisible = false;
   }
 
   handleCancel(): void {
@@ -47,52 +49,19 @@ export class AddNewGoodsComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
+
+    let fileNames = _.chain(this.fileList)
+      .filter((file) => file.status === 'done')
+      .map((file) => file.name)
+      .value();
+
+    this.httpService.createGoods({
+      ...this.validateForm.value,
+      images: fileNames,
+    }).subscribe();
   }
 
-  genderChange(value: string): void {
-    this.validateForm
-      .get('note')!
-      .setValue(value === 'male' ? 'Hi, man!' : 'Hi, lady!');
-  }
-
-  fileList: NzUploadFile[] = [
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-2',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-3',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-4',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-xxx',
-      percent: 50,
-      name: 'image.png',
-      status: 'uploading',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-5',
-      name: 'image.png',
-      status: 'error'
-    }
-  ];
+  fileList: NzUploadFile[] = [];
 
   previewImage: string | undefined = '';
   previewVisible = false;
@@ -110,8 +79,7 @@ export class AddNewGoodsComponent implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
+      reader.onerror = (error) => reject(error);
     });
   }
-
 }
