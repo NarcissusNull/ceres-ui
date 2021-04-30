@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
+  queryImage(img: String) {}
 
-  queryImage(img: String) {
-    return this.httpClient.get("http://localhost:8080/img/" + img).subscribe()
+  createTypes(types: String[]) {
+    this.httpClient.post('/api/admin/types', types).subscribe();
   }
 }

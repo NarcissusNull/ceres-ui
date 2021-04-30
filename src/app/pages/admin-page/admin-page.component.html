@@ -1,1 +1,68 @@
-<p>admin-page works!</p>
+<button nz-button [nzType]="'primary'" (click)="showModal()">
+  <span>添加新分类</span>
+</button>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="添加新分类"
+  [nzFooter]="null"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item *ngFor="let control of listOfControl; let i = index">
+        <nz-form-label
+          [nzXs]="24"
+          [nzSm]="4"
+          *ngIf="i == 0"
+          [nzFor]="control.controlInstance"
+          >新分类
+        </nz-form-label>
+        <nz-form-control
+          [nzXs]="24"
+          [nzSm]="20"
+          [nzOffset]="i == 0 ? 0 : 4"
+          nzErrorTip="请填写新分类."
+        >
+          <input
+            class="passenger-input"
+            nz-input
+            placeholder="新分类"
+            [attr.id]="control.id"
+            [formControlName]="control.controlInstance"
+          />
+          <i
+            nz-icon
+            nzType="minus-circle-o"
+            class="dynamic-delete-button"
+            (click)="removeField(control, $event)"
+          ></i>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control
+          [nzXs]="{ span: 24, offset: 0 }"
+          [nzSm]="{ span: 20, offset: 4 }"
+        >
+          <button
+            nz-button
+            nzType="dashed"
+            class="add-button"
+            (click)="addField($event)"
+          >
+            <i nz-icon nzType="plus"></i>
+            添加更多
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control
+          [nzXs]="{ span: 24, offset: 0 }"
+          [nzSm]="{ span: 20, offset: 4 }"
+        >
+          <button nz-button nzType="primary">确认</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
