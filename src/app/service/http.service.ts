@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import Goods from '../domain/goods.domin';
 import Type from '../domain/type.domin';
 
 @Injectable({
@@ -20,6 +21,10 @@ export class HttpService {
   }
 
   createGoods(goods: any) {
-    return this.httpClient.post('/api/goods/create', goods)
+    return this.httpClient.post('/api/goods/create', goods);
+  }
+
+  queryGoods(size: number): Observable<Goods[]> {
+      return this.httpClient.get<Goods[]>('/api/goods/' + size)
   }
 }
