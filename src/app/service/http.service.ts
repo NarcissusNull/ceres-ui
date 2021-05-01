@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import Goods from '../domain/goods.domin';
 import Type from '../domain/type.domin';
+import User from '../domain/user.domin';
 
 @Injectable({
   providedIn: 'root',
@@ -30,5 +31,9 @@ export class HttpService {
 
   queryGoodsDetail(id: number): Observable<Goods> {
     return this.httpClient.get<Goods>('/api/goods/detail/' + id)
+  }
+
+  login(name: string, password: string): Observable<User> {
+    return this.httpClient.post<User>('/api/user/login', {"name": name, "password": password})
   }
 }
