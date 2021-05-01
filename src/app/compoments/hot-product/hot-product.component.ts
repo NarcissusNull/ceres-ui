@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Goods from 'src/app/domain/goods.domin';
 import { HttpService } from 'src/app/service/http.service';
 
 @Component({
@@ -7,10 +8,14 @@ import { HttpService } from 'src/app/service/http.service';
   styleUrls: ['./hot-product.component.css']
 })
 export class HotProductComponent implements OnInit {
+  goods: Goods[] = [];
 
   constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
+    this.httpService.queryGoods(5).subscribe(
+      data => this.goods = data
+    )
   }
 
 }

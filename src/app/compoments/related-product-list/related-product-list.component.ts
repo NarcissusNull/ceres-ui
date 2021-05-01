@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Goods from 'src/app/domain/goods.domin';
+import { HttpService } from 'src/app/service/http.service';
 
 @Component({
   selector: 'app-related-product-list',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelatedProductListComponent implements OnInit {
 
-  constructor() { }
+  goods!: Goods[];
+  constructor(private httpServie: HttpService) {
+    this.httpServie.queryGoods(10).subscribe(
+      data => this.goods = data
+    )
+   }
 
   ngOnInit(): void {
+    // this.httpServie.queryGoods(10).subscribe(
+    //   data => this.goods = data
+    // )
   }
 
 }

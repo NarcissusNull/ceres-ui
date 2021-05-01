@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,7 +48,7 @@ registerLocaleData(zh);
     ProductDetailPageComponent,
     DetailHeaderComponent,
     DetailContentComponent,
-    AddNewGoodsComponent
+    AddNewGoodsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +57,11 @@ registerLocaleData(zh);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AntdModule
+    AntdModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
