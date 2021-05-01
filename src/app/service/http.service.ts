@@ -27,4 +27,8 @@ export class HttpService {
   queryGoods(size: number): Observable<Goods[]> {
       return this.httpClient.get<Goods[]>('/api/goods/' + size)
   }
+
+  queryGoodsDetail(id: number): Observable<Goods> {
+    return this.httpClient.get<Goods>('/api/goods/detail/' + id)
+  }
 }

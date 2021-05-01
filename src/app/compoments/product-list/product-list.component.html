@@ -1,6 +1,6 @@
 <div class="nz-row" *ngFor="let goods of g" nz-row [nzGutter]="16" nzJustify="space-around">
 
-  <div nz-col *ngFor="let good of goods" class="gutter-row" [nzSpan]="1">
+  <div nz-col *ngFor="let good of goods" (click)='this.click(good)' class="gutter-row" [nzSpan]="1">
     <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate">
       <nz-card-meta
         style="height: 40px"

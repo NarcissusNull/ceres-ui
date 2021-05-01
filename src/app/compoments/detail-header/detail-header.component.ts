@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import Goods from 'src/app/domain/goods.domin';
 
 @Component({
   selector: 'app-detail-header',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detail-header.component.css']
 })
 export class DetailHeaderComponent implements OnInit {
+
+  @Input() good!: Goods;
 
   constructor() { }
 

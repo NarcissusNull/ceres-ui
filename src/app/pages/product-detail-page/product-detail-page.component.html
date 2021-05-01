@@ -1,2 +1,2 @@
-<app-detail-header></app-detail-header>
-<app-detail-content></app-detail-content>
+<app-detail-header *ngIf="good !== null && good !== undefined" [good]="good"></app-detail-header>
+<app-detail-content *ngIf="good !== null && good !== undefined" [good]="good"></app-detail-content>
