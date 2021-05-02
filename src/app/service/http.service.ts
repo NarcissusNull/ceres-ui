@@ -36,4 +36,8 @@ export class HttpService {
   login(name: string, password: string): Observable<User> {
     return this.httpClient.post<User>('/api/user/login', {"name": name, "password": password})
   }
+
+  search(value: string): Observable<Goods[]> {
+    return this.httpClient.get<Goods[]>('/api/goods/search/' + value)
+  }
 }

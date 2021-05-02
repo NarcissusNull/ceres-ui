@@ -1,8 +1,8 @@
 <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-  <input type="text" nz-input [placeholder]="getRecommand()" />
+  <input #search type="text" nz-input [placeholder]="getRecommand()" />
 </nz-input-group>
 <ng-template #suffixIconButton>
-  <button nz-button nzType="primary" nzSearch>
+  <button (click)="onSearch(search.value)" nz-button nzType="primary" nzSearch>
     <i nz-icon nzType="search"></i>
   </button>
 </ng-template>

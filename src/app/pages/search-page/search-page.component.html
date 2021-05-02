@@ -20,5 +20,5 @@
   <li nz-menu-item></li>
 </ul>
 
-<app-product-list></app-product-list>
+<app-product-list *ngIf="goods.length > 0" [goods]="goods"></app-product-list>
 <nz-back-top></nz-back-top>
