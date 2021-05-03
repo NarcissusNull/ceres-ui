@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import Goods from 'src/app/domain/goods.domin';
+import Goods from 'src/app/domain/goods.domain';
 import { HttpService } from 'src/app/service/http.service';
 import { SearchService } from 'src/app/service/search.service';
 

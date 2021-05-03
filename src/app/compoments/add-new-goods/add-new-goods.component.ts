@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import * as _ from 'lodash';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import Type from 'src/app/domain/type.domin';
+import Type from 'src/app/domain/type.domain';
 import { HttpService } from 'src/app/service/http.service';
 
 @Component({

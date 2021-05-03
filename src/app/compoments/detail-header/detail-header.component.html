@@ -11,6 +11,6 @@ alt=""
     <p>{{ good.name }}</p>
     <nz-page-header class="site-page-header" [nzTitle]="'价格: ￥：' + good.price">
     </nz-page-header>
-    <button style="margin-top: 200px" nz-button nzType="primary" nzSize="large">立即购买</button>
+    <button style="margin-top: 200px" nz-button nzType="primary" nzSize="large" (click)="onBuy()">立即购买</button>
     <button style="margin-left: 10px;" nz-button nzType="primary" nzSize="large"><i nz-icon nzType="shopping-cart"></i>加入购物车</button>
 </div>

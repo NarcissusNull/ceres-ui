@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import Goods from 'src/app/domain/goods.domin';
+import Goods from 'src/app/domain/goods.domain';
 
 @Component({
   selector: 'app-product-list',
