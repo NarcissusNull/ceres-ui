@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Goods from 'src/app/domain/goods.domain';
 import { HttpService } from 'src/app/service/http.service';
 
@@ -10,7 +11,7 @@ import { HttpService } from 'src/app/service/http.service';
 export class HotProductComponent implements OnInit {
   goods: Goods[] = [];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, public router: Router) { }
 
   ngOnInit(): void {
     this.httpService.queryGoods(5).subscribe(
@@ -18,4 +19,7 @@ export class HotProductComponent implements OnInit {
     )
   }
 
+  click(good: Goods) {
+    this.router.navigateByUrl('/detail/' + good.id)
+  }
 }

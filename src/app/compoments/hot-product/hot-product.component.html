@@ -4,7 +4,7 @@
   </nz-page-header-tags></nz-page-header
 >
 <div class="nz-row" nz-row [nzGutter]="16" nzJustify="space-around">
-  <div nz-col class="gutter-row" [nzSpan]="1">
+  <div nz-col class="gutter-row" [nzSpan]="1" (click)='this.click(goods[0])'>
     <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate1">
       <nz-card-meta
         style="height: 40px"
@@ -21,7 +21,7 @@
       />
     </ng-template>
   </div>
-  <div nz-col class="gutter-row" [nzSpan]="1">
+  <div nz-col class="gutter-row" [nzSpan]="1" (click)='this.click(goods[1])'>
     <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate2">
       <nz-card-meta
         style="height: 40px"
@@ -38,7 +38,7 @@
       />
     </ng-template>
   </div>
-  <div nz-col class="gutter-row" [nzSpan]="1">
+  <div nz-col class="gutter-row" [nzSpan]="1" (click)='this.click(goods[2])'>
     <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate3">
       <nz-card-meta
         style="height: 40px"
@@ -55,7 +55,7 @@
       />
     </ng-template>
   </div>
-  <div nz-col class="gutter-row" [nzSpan]="1">
+  <div nz-col class="gutter-row" [nzSpan]="1" (click)='this.click(goods[3])'>
     <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate4">
       <nz-card-meta
         style="height: 40px"
@@ -72,7 +72,7 @@
       />
     </ng-template>
   </div>
-  <div nz-col class="gutter-row" [nzSpan]="4">
+  <div nz-col class="gutter-row" [nzSpan]="4" (click)='this.click(goods[4])'>
     <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate5">
       <nz-card-meta
         style="height: 40px"
