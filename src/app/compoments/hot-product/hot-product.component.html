@@ -8,8 +8,8 @@
     <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate1">
       <nz-card-meta
         style="height: 40px"
-        nzTitle="Europe Street beat"
-        nzDescription="www.instagram.com"
+        [nzTitle]="goods[0].name"
+        [nzDescription]="'￥：' + goods[0].price.toString()"
       ></nz-card-meta>
     </nz-card>
     <ng-template #coverTemplate1>
@@ -22,14 +22,14 @@
     </ng-template>
   </div>
   <div nz-col class="gutter-row" [nzSpan]="1">
-    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate">
+    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate2">
       <nz-card-meta
         style="height: 40px"
-        nzTitle="Europe Street beat"
-        nzDescription="www.instagram.com"
+        [nzTitle]="goods[1].name"
+        [nzDescription]="'￥：' + goods[1].price.toString()"
       ></nz-card-meta>
     </nz-card>
-    <ng-template #coverTemplate>
+    <ng-template #coverTemplate2>
       <img
         width="180px"
         height="180px"
@@ -39,14 +39,14 @@
     </ng-template>
   </div>
   <div nz-col class="gutter-row" [nzSpan]="1">
-    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate">
+    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate3">
       <nz-card-meta
         style="height: 40px"
-        nzTitle="Europe Street beat"
-        nzDescription="www.instagram.com"
+        [nzTitle]="goods[2].name"
+        [nzDescription]="'￥：' + goods[2].price.toString()"
       ></nz-card-meta>
     </nz-card>
-    <ng-template #coverTemplate>
+    <ng-template #coverTemplate3>
       <img
         width="180px"
         height="180px"
@@ -56,14 +56,14 @@
     </ng-template>
   </div>
   <div nz-col class="gutter-row" [nzSpan]="1">
-    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate">
+    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate4">
       <nz-card-meta
         style="height: 40px"
-        nzTitle="Europe Street beat"
-        nzDescription="www.instagram.com"
+        [nzTitle]="goods[3].name"
+        [nzDescription]="'￥：' + goods[3].price.toString()"
       ></nz-card-meta>
     </nz-card>
-    <ng-template #coverTemplate>
+    <ng-template #coverTemplate4>
       <img
         width="180px"
         height="180px"
@@ -73,14 +73,14 @@
     </ng-template>
   </div>
   <div nz-col class="gutter-row" [nzSpan]="4">
-    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate">
+    <nz-card nzHoverable style="width: 180px" [nzCover]="coverTemplate5">
       <nz-card-meta
         style="height: 40px"
-        nzTitle="Europe Street beat"
-        nzDescription="www.instagram.com"
+        [nzTitle]="goods[4].name"
+        [nzDescription]="'￥：' + goods[4].price.toString()"
       ></nz-card-meta>
     </nz-card>
-    <ng-template #coverTemplate>
+    <ng-template #coverTemplate5>
       <img
         width="180px"
         height="180px"
