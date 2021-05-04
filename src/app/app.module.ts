@@ -28,6 +28,7 @@ import { DetailHeaderComponent } from './compoments/detail-header/detail-header.
 import { DetailContentComponent } from './compoments/detail-content/detail-content.component';
 import { AddNewGoodsComponent } from './compoments/add-new-goods/add-new-goods.component';
 import { OrderConfirmComponent } from './compoments/order-confirm/order-confirm.component';
+import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 
 registerLocaleData(zh);
 
@@ -51,6 +52,7 @@ registerLocaleData(zh);
     DetailContentComponent,
     AddNewGoodsComponent,
     OrderConfirmComponent,
+    SignUpPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -48,6 +48,13 @@ export class HttpService {
     });
   }
 
+  signup(name: string, password: string): Observable<User> {
+    return this.httpClient.post<User>('/api/user/signup', {
+      name: name,
+      password: password,
+    });
+  }
+
   search(value: string): Observable<Goods[]> {
     return this.httpClient.get<Goods[]>('/api/goods/search/' + value);
   }

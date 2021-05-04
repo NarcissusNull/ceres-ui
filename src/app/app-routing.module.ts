@@ -5,6 +5,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ProductDetailPageComponent } from './pages/product-detail-page/product-detail-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: ProductDetailPageComponent},
   { path: 'admin', component: AdminPageComponent},
   { path: 'login', component: LoginPageComponent},
+  { path: 'signup', component: SignUpPageComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 
