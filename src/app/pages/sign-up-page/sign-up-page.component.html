@@ -1,4 +1,4 @@
-<nz-modal nzVisible="true" nzTitle="登录" [nzFooter]="null">
+<nz-modal nzVisible="true" nzTitle="注册" [nzFooter]="null">
     <ng-container *nzModalContent>
       <form
         nz-form
@@ -26,6 +26,19 @@
                 nz-input
                 formControlName="password"
                 placeholder="密码"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入地址">
+            <nz-input-group>
+              <input
+                type="text"
+                nz-input
+                formControlName="address"
+                placeholder="地址"
               />
             </nz-input-group>
           </nz-form-control>

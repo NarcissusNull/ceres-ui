@@ -1,13 +1,27 @@
 <nz-header>
-  <nz-avatar
+    <nz-avatar
     class="user-avatar"
     [nzShape]="'square'"
     [nzSize]="35"
     [nzIcon]="'user'"
+    (click)="openUserInfo()"
   ></nz-avatar>
+
   <app-search></app-search>
   <button class="shopping-cart" nz-button nzType="primary" nzShape="round" (click)="open()">
     <i nz-icon nzType="shopping-cart"></i>购物车
   </button>
 </nz-header>
 <app-shopping-cart [visible]="visible" (close)="close()"></app-shopping-cart>
+
+<nz-modal
+  [(nzVisible)]="isUserInfoVisible"
+  nzTitle="用户信息"
+  [nzFooter]="null"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <p>用户名：{{ user.name }}</p>
+    <p>地址：{{ user.address }}</p>
+  </ng-container>
+</nz-modal>

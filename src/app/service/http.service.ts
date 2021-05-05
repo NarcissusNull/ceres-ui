@@ -11,6 +11,12 @@ import User from '../domain/user.domain';
   providedIn: 'root',
 })
 export class HttpService {
+  createCart(id: number, user: number) {
+    return this.httpClient.get('/api/goods/cart/' + id + '/' + user)
+  }
+  queryUser(id: number) {
+    return this.httpClient.get<User>('api/user/' + id);
+  }
   createOrder(goods: Goods[]) {
     let user = Number(localStorage.getItem('userId'))
     let goodsIds = _.map(goods, goods => goods.id)
@@ -23,6 +29,7 @@ export class HttpService {
 
   createTypes(types: String[]) {
     this.httpClient.post('/api/admin/types', types).subscribe();
+    alert('创建新分类成功')
   }
 
   queryTypes(): Observable<Type[]> {
@@ -48,10 +55,11 @@ export class HttpService {
     });
   }
 
-  signup(name: string, password: string): Observable<User> {
+  signup(name: string, password: string, address: string): Observable<User> {
     return this.httpClient.post<User>('/api/user/signup', {
       name: name,
       password: password,
+      address: address
     });
   }
 

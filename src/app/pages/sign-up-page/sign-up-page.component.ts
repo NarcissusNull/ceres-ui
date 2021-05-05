@@ -20,7 +20,7 @@ export class SignUpPageComponent implements OnInit {
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [true],
+      address: [null, [Validators.required]],
     });
   }
 
@@ -35,7 +35,8 @@ export class SignUpPageComponent implements OnInit {
     this.httpService
       .signup(
         this.validateForm.value['userName'],
-        this.validateForm.value['password']
+        this.validateForm.value['password'],
+        this.validateForm.value['address']
       )
       .subscribe((data) => {
         if (data.id) {

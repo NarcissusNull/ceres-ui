@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import User from 'src/app/domain/user.domain';
+import { HttpService } from 'src/app/service/http.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   visible = false;
+  user!: User;
+  isUserInfoVisible = false;
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
   }
@@ -18,5 +22,18 @@ export class ToolbarComponent implements OnInit {
 
   close(): void {
     this.visible = false;
+  }
+
+  handleCancel() {
+    this.isUserInfoVisible = false;
+  }
+
+  openUserInfo() {
+   this.httpService.queryUser(Number(localStorage.getItem('userId'))).subscribe(
+     data => {
+       this.user = data
+       this.isUserInfoVisible = true
+     }
+   )
   }
 }

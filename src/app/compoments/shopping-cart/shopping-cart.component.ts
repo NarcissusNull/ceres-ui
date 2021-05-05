@@ -1,8 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import Goods from 'src/app/domain/goods.domain';
+import { HttpService } from 'src/app/service/http.service';
 const count = 5;
-const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
+const fakeDataUrl =
+  'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 interface ItemData {
   href: string;
   title: string;
@@ -13,7 +16,7 @@ interface ItemData {
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css']
+  styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
   @Input()
@@ -22,9 +25,13 @@ export class ShoppingCartComponent implements OnInit {
   @Output()
   close: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private http: HttpClient, private msg: NzMessageService) { }
+  constructor(
+    private http: HttpClient,
+    private msg: NzMessageService,
+    private httpService: HttpService
+  ) {}
 
-  data: ItemData[] = [];
+  data: Goods[] = [];
   list: Array<{ loading: boolean; name: any }> = [];
   percent = 0;
 
@@ -51,16 +58,29 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   loadData(pi: number): void {
-    this.data = new Array(50).fill({}).map((_, index) => {
-      return {
-        href: 'http://ant.design',
-        title: `ant design part ${index} (page: ${pi})`,
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources ' +
-          '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.'
-      };
+    this.http
+      .get<Goods[]>('/api/goods/cart/search/' + localStorage.getItem('userId'))
+      .subscribe((data) => (this.data = data));
+  }
+
+  onBuy() {
+    this.httpService.createOrder(this.data).subscribe((data) => {
+      if (data.id) {
+        alert('购买成功！');
+      }
     });
+
+    this.http
+      .get('/api/goods/cart/clear/' + localStorage.getItem('userId'))
+      .subscribe((data) => location.reload());
+  }
+
+  removeCart(id: number) {
+    this.http
+      .get('api/goods/cart/remove/' + localStorage.getItem('userId') + '/' + id)
+      .subscribe((data) => {
+        alert('删除成功');
+        location.reload();
+      });
   }
 }
