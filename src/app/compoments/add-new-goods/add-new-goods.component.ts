@@ -55,12 +55,15 @@ export class AddNewGoodsComponent implements OnInit {
       .map((file) => file.name)
       .value();
 
-    this.httpService.createGoods({
-      ...this.validateForm.value,
-      images: fileNames,
-    }).subscribe(data =>
-    alert('新增商品成功')
-       );
+    this.httpService
+      .createGoods({
+        ...this.validateForm.value,
+        images: fileNames,
+      })
+      .subscribe((data) => {
+        alert('新增商品成功')
+        location.reload();
+      });
   }
 
   fileList: NzUploadFile[] = [];

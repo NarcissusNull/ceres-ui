@@ -106,6 +106,13 @@ export class AdminPageComponent implements OnInit {
 
   edit(item: any): void {
   }
+
+  deleted(item: Goods) {
+    this.http.get('/api/goods/delete/' + item.id).subscribe(data => {
+      alert('删除成功!')
+      location.reload()
+    })
+  }
 }
 const count = 5;
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
