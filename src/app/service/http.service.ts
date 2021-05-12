@@ -66,4 +66,9 @@ export class HttpService {
   search(value: string): Observable<Goods[]> {
     return this.httpClient.get<Goods[]>('/api/goods/search/' + value);
   }
+
+  allGoods(): Observable<Goods[]> {
+    return this.httpClient.get<Goods[]>('/api/goods/search')
+  }
+
 }

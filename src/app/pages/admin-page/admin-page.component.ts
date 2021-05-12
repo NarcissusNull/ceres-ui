@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { HttpService } from 'src/app/service/http.service';
 import * as _ from 'lodash';
+import { HttpClient } from '@angular/common/http';
+import Goods from 'src/app/domain/goods.domain';
 
 @Component({
   selector: 'app-admin-page',
@@ -17,7 +19,8 @@ export class AdminPageComponent implements OnInit {
   isVisible = false;
   validateForm!: FormGroup;
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
-  constructor(private fb: FormBuilder, private httpService: HttpService) {}
+  constructor(private fb: FormBuilder, private httpService: HttpService, private http: HttpClient) {}
+  list!: Goods[];
 
   addField(e?: MouseEvent): void {
     if (e) {
@@ -63,6 +66,12 @@ export class AdminPageComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({});
     this.addField();
+    this.httpService.allGoods().subscribe(
+      data => {
+        this.list = data
+        this.initLoading = false
+      }
+    )
   }
 
   showModal(): void {
@@ -76,4 +85,27 @@ export class AdminPageComponent implements OnInit {
   handleCancel(): void {
     this.isVisible = false;
   }
+
+  initLoading = true; // bug
+  loadingMore = false;
+  data: any[] = [];
+
+  getData(callback: (res: any) => void): void {
+    this.http.get(fakeDataUrl).subscribe((res: any) => callback(res));
+  }
+
+  onLoadMore(): void {
+    this.loadingMore = true;
+    this.list = this.data.concat([...Array(count)].fill({}).map(() => ({ loading: true, name: {} })));
+    this.http.get(fakeDataUrl).subscribe((res: any) => {
+      this.data = this.data.concat(res.results);
+      this.list = [...this.data];
+      this.loadingMore = false;
+    });
+  }
+
+  edit(item: any): void {
+  }
 }
+const count = 5;
+const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';

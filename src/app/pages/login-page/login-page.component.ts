@@ -10,6 +10,10 @@ import { HttpService } from 'src/app/service/http.service';
 })
 export class LoginPageComponent implements OnInit {
   validateForm!: FormGroup;
+  title: string = '用户登录';
+  userVisible = true;
+  adminVisible = false;
+
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -17,21 +21,28 @@ export class LoginPageComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
 
-    console.log(this.validateForm.value)
+    console.log(this.validateForm.value);
 
-    this.httpService.login(this.validateForm.value['userName'], this.validateForm.value['password']).subscribe(
-      data => {
-        if(data.id) {
-          localStorage.setItem("userId", data.id.toString())
-          this.router.navigateByUrl('/home')
+    this.httpService
+      .login(
+        this.validateForm.value['userName'],
+        this.validateForm.value['password']
+      )
+      .subscribe((data) => {
+        if (data.id) {
+          localStorage.setItem('userId', data.id.toString());
+          this.router.navigateByUrl('/home');
         } else {
           alert('用户名或者密码错误！');
         }
-      }
-    )
+      });
   }
 
-  constructor(private fb: FormBuilder, private httpService: HttpService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private httpService: HttpService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -39,5 +50,10 @@ export class LoginPageComponent implements OnInit {
       password: [null, [Validators.required]],
       remember: [true],
     });
+  }
+
+  onChange() {
+    this.adminVisible = !this.adminVisible;
+    this.userVisible = !this.userVisible;
   }
 }
