@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import Goods from 'src/app/domain/goods.domain';
 import Type from 'src/app/domain/type.domain';
+import OrderDto from 'src/app/domain/order.domain';
 
 @Component({
   selector: 'app-admin-page',
@@ -23,6 +24,8 @@ export class AdminPageComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpService: HttpService, private http: HttpClient) {}
   list!: Goods[];
   isChangeVisible = false;
+  orderList!: OrderDto[];
+  isNewOrderVisible = false;
 
   changedGoods!: Goods;
  
@@ -76,6 +79,10 @@ export class AdminPageComponent implements OnInit {
         this.initLoading = false
       }
     )
+
+    this.httpService.notice().subscribe(
+      data => this.orderList = data
+    )
   }
 
   showModal(): void {
@@ -88,6 +95,14 @@ export class AdminPageComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  showNewOrderModal() {
+    this.isNewOrderVisible = true;
+  }
+
+  handleNewOrderCancel() {
+    this.isNewOrderVisible = false;
   }
 
   initLoading = true;

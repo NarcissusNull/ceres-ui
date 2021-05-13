@@ -3,6 +3,7 @@ import { Injectable, ɵEMPTY_MAP } from '@angular/core';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import Goods from '../domain/goods.domain';
+import OrderDto from '../domain/order.domain';
 import orderDto from '../domain/order.domain';
 import Type from '../domain/type.domain';
 import User from '../domain/user.domain';
@@ -11,6 +12,9 @@ import User from '../domain/user.domain';
   providedIn: 'root',
 })
 export class HttpService {
+  notice(): Observable<OrderDto[]> {
+    return this.httpClient.get<OrderDto[]>('/api/admin/notice/list/' + localStorage.getItem('userId'))
+  }
   createCart(id: number, user: number) {
     return this.httpClient.get('/api/goods/cart/' + id + '/' + user)
   }

@@ -66,25 +66,60 @@
     </form>
   </ng-container>
 </nz-modal>
-<app-add-new-goods style="margin-left: 50px;"></app-add-new-goods>
+<app-add-new-goods style="margin-left: 50px"></app-add-new-goods>
+<button style="margin-left: 50px" nz-button [nzType]="'primary'" (click)="showNewOrderModal()">
+  <span>查看新订单</span>
+</button>
+
+<nz-modal
+  [(nzVisible)]="isNewOrderVisible"
+  nzTitle="查看新订单"
+  [nzFooter]="null"
+  (nzOnCancel)="handleNewOrderCancel()"
+>
+  <ng-container *nzModalContent>
+    <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
+      <nz-list-item *ngFor="let order of orderList">
+        <ng-container>
+          <nz-list-item-meta>
+            <nz-list-item-meta-title
+              >订单ID：{{ order.id }}</nz-list-item-meta-title
+            >
+            <nz-list-item-meta-title
+              >所属用户ID：{{ order.user }}</nz-list-item-meta-title
+            >
+            <nz-list-item-meta-title>
+              购买的商品：{{ order.goods }}
+            </nz-list-item-meta-title>
+          </nz-list-item-meta>
+        </ng-container>
+      </nz-list-item>
+    </nz-list>
+  </ng-container>
+</nz-modal>
 
 <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
   <nz-list-item *ngFor="let item of list">
     <ng-container>
-      <nz-list-item-meta
-        [nzAvatar]="'api/img/' + item.main"
-      >
+      <nz-list-item-meta [nzAvatar]="'api/img/' + item.main">
         <nz-list-item-meta-title>
           <a [routerLink]="'/detail/' + item.id">{{ item.name }}</a>
         </nz-list-item-meta-title>
       </nz-list-item-meta>
-      {{ '价格: ￥：' + item.price }}
+      {{ "价格: ￥：" + item.price }}
       <ul nz-list-item-actions>
-        <nz-list-item-action><a (click)="edit(item)">编辑</a></nz-list-item-action>
-        <nz-list-item-action><a (click)="deleted(item)">删除</a></nz-list-item-action>
+        <nz-list-item-action
+          ><a (click)="edit(item)">编辑</a></nz-list-item-action
+        >
+        <nz-list-item-action
+          ><a (click)="deleted(item)">删除</a></nz-list-item-action
+        >
       </ul>
     </ng-container>
   </nz-list-item>
 </nz-list>
 
-<app-change-product [goods]="changedGoods" [isVisible]="isChangeVisible"></app-change-product>
+<app-change-product
+  [goods]="changedGoods"
+  [isVisible]="isChangeVisible"
+></app-change-product>
