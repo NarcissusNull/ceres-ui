@@ -74,8 +74,8 @@
 <nz-modal
   [(nzVisible)]="isNewOrderVisible"
   nzTitle="查看新订单"
-  [nzFooter]="null"
   (nzOnCancel)="handleNewOrderCancel()"
+  (nzOnOk)="handleNewOrderOk()"
 >
   <ng-container *nzModalContent>
     <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">

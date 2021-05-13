@@ -109,20 +109,6 @@ export class AdminPageComponent implements OnInit {
   loadingMore = false;
   data: any[] = [];
 
-  getData(callback: (res: any) => void): void {
-    this.http.get(fakeDataUrl).subscribe((res: any) => callback(res));
-  }
-
-  onLoadMore(): void {
-    this.loadingMore = true;
-    this.list = this.data.concat([...Array(count)].fill({}).map(() => ({ loading: true, name: {} })));
-    this.http.get(fakeDataUrl).subscribe((res: any) => {
-      this.data = this.data.concat(res.results);
-      this.list = [...this.data];
-      this.loadingMore = false;
-    });
-  }
-
   edit(item: Goods): void {
     this.changedGoods = item
     this.isChangeVisible = true
@@ -134,6 +120,13 @@ export class AdminPageComponent implements OnInit {
       location.reload()
     })
   }
+
+  handleNewOrderOk() {
+    this.http.get('/api/admin/notice/clear/' + localStorage.getItem('userId')).subscribe(
+      data => {
+        alert("清除新订单成功！")
+        location.reload();
+      }
+    )
+  }
 }
-const count = 5;
-const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
