@@ -29,6 +29,7 @@ import { DetailContentComponent } from './compoments/detail-content/detail-conte
 import { AddNewGoodsComponent } from './compoments/add-new-goods/add-new-goods.component';
 import { OrderConfirmComponent } from './compoments/order-confirm/order-confirm.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { ChangeProductComponent } from './compoments/change-product/change-product.component';
 
 registerLocaleData(zh);
 
@@ -53,6 +54,7 @@ registerLocaleData(zh);
     AddNewGoodsComponent,
     OrderConfirmComponent,
     SignUpPageComponent,
+    ChangeProductComponent,
   ],
   imports: [
     BrowserModule,

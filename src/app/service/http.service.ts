@@ -14,6 +14,10 @@ export class HttpService {
   createCart(id: number, user: number) {
     return this.httpClient.get('/api/goods/cart/' + id + '/' + user)
   }
+
+  changeGoods(goods: any) {
+    return this.httpClient.post('/api/goods/update/', goods)
+  }
   queryUser(id: number) {
     return this.httpClient.get<User>('api/user/' + id);
   }

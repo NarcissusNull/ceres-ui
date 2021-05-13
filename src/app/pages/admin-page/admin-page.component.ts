@@ -9,6 +9,7 @@ import { HttpService } from 'src/app/service/http.service';
 import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import Goods from 'src/app/domain/goods.domain';
+import Type from 'src/app/domain/type.domain';
 
 @Component({
   selector: 'app-admin-page',
@@ -21,7 +22,10 @@ export class AdminPageComponent implements OnInit {
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
   constructor(private fb: FormBuilder, private httpService: HttpService, private http: HttpClient) {}
   list!: Goods[];
+  isChangeVisible = false;
 
+  changedGoods!: Goods;
+ 
   addField(e?: MouseEvent): void {
     if (e) {
       e.preventDefault();
@@ -86,7 +90,7 @@ export class AdminPageComponent implements OnInit {
     this.isVisible = false;
   }
 
-  initLoading = true; // bug
+  initLoading = true;
   loadingMore = false;
   data: any[] = [];
 
@@ -104,7 +108,9 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  edit(item: any): void {
+  edit(item: Goods): void {
+    this.changedGoods = item
+    this.isChangeVisible = true
   }
 
   deleted(item: Goods) {
