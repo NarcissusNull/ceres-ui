@@ -9,6 +9,7 @@ import { HttpService } from 'src/app/service/http.service';
 })
 export class DetailHeaderComponent implements OnInit {
   @Input() good!: Goods;
+  isVisible = false;
 
   constructor(private httpService: HttpService) {}
 
@@ -31,5 +32,18 @@ export class DetailHeaderComponent implements OnInit {
         alert('添加购物车成功');
         location.reload();
       });
+  }
+
+  handleCancel() {
+    this.isVisible = false;
+  }
+
+  handleOk() {
+    this.isVisible = false;
+    this.onBuy();
+  }
+
+  onPayment() {
+    this.isVisible = true;
   }
 }

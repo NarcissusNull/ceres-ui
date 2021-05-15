@@ -12,10 +12,15 @@ export class ToolbarComponent implements OnInit {
   visible = false;
   user!: User;
   isUserInfoVisible = false;
+  isAdmin = false;
 
   constructor(private httpService: HttpService, private route: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.httpService.queryUser(Number(localStorage.getItem('userId'))).subscribe(
+      data => this.isAdmin = data.role === "admin"
+    )
+  }
   open(): void {
     this.visible = true;
   }
@@ -43,5 +48,9 @@ export class ToolbarComponent implements OnInit {
     localStorage.clear();
     alert('用户退出成功！')
     this.isUserInfoVisible = false;
+  }
+
+  openAdmin() {
+    this.route.navigateByUrl("/admin")
   }
 }

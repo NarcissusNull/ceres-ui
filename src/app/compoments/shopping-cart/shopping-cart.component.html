@@ -1,4 +1,12 @@
-<nz-drawer [nzWidth]="500" [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="购物车" (nzOnClose)="onClose()" [nzFooter]="footerTpl">
+<nz-drawer
+  [nzWidth]="500"
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="right"
+  nzTitle="购物车"
+  (nzOnClose)="onClose()"
+  [nzFooter]="footerTpl"
+>
   <nz-list nzItemLayout="vertical">
     <nz-list-item *ngFor="let item of data">
       <nz-list-item-meta>
@@ -10,22 +18,37 @@
         </nz-list-item-meta-description>
       </nz-list-item-meta>
       <ul nz-list-item-actions>
-        <nz-list-item-action>    <nz-button-group>
+        <!-- <nz-list-item-action>    <nz-button-group>
           <button nz-button (click)="decline()"><i nz-icon nzType="minus"></i></button>
           <input width="100" type="text" nz-input [maxLength]="2" disabled/>
           <button nz-button (click)="increase()"><i nz-icon nzType="plus"></i></button>
-        </nz-button-group></nz-list-item-action>
-        <nz-list-item-action><i nz-icon nzType="close" style="margin-right: 8px;" (click)="removeCart(item.id)"></i></nz-list-item-action>
+        </nz-button-group></nz-list-item-action> -->
+        <nz-list-item-action
+          ><i
+            nz-icon
+            nzType="close"
+            style="margin-right: 8px"
+            (click)="removeCart(item.id)"
+          ></i
+        ></nz-list-item-action>
       </ul>
       <nz-list-item-extra>
-        <img width="100" height="100" alt="logo" [src]="'/api/img/' + item.main" />
+        <img
+          width="100"
+          height="100"
+          alt="logo"
+          [src]="'/api/img/' + item.main"
+        />
       </nz-list-item-extra>
     </nz-list-item>
   </nz-list>
 </nz-drawer>
 <ng-template #footerTpl>
+  <span>总价：{{ total }}</span>
   <div style="float: right">
-    <button nz-button style="margin-right: 8px;" (click)="onClose()">取消</button>
+    <button nz-button style="margin-right: 8px" (click)="onClose()">
+      取消
+    </button>
     <button nz-button nzType="primary" (click)="onBuy()">购买</button>
   </div>
 </ng-template>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import Goods from 'src/app/domain/goods.domain';
 import { HttpService } from 'src/app/service/http.service';
+import * as _ from 'lodash';
 const count = 5;
 const fakeDataUrl =
   'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
@@ -25,6 +26,8 @@ export class ShoppingCartComponent implements OnInit {
   @Output()
   close: EventEmitter<void> = new EventEmitter<void>();
 
+  total = 0;
+
   constructor(
     private http: HttpClient,
     private msg: NzMessageService,
@@ -36,7 +39,7 @@ export class ShoppingCartComponent implements OnInit {
   percent = 0;
 
   ngOnInit(): void {
-    this.loadData(1);
+    this.loadData();
   }
 
   increase(): void {
@@ -57,10 +60,15 @@ export class ShoppingCartComponent implements OnInit {
     this.close.emit();
   }
 
-  loadData(pi: number): void {
+  loadData(): void {
     this.http
       .get<Goods[]>('/api/goods/cart/search/' + localStorage.getItem('userId'))
-      .subscribe((data) => (this.data = data));
+      .subscribe((data) => {
+        this.data = data;
+        let price = 0;
+        _.forEach(data, (g) => (price += g.price));
+        this.total = price;
+      });
   }
 
   onBuy() {
