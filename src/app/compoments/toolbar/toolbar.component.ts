@@ -13,6 +13,7 @@ export class ToolbarComponent implements OnInit {
   user!: User;
   isUserInfoVisible = false;
   isAdmin = false;
+  isMapVisible = false;
 
   constructor(private httpService: HttpService, private route: Router) {}
 
@@ -52,5 +53,13 @@ export class ToolbarComponent implements OnInit {
 
   openAdmin() {
     this.route.navigateByUrl("/admin")
+  }
+
+  openMap() {
+    this.isMapVisible = true;
+  }
+
+  handleMapCancel() {
+    this.isMapVisible = false;
   }
 }

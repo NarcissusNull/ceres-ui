@@ -1,18 +1,37 @@
 <img
-class="img2"
-nz-image
-width="400px"
-height="400px"
-[nzSrc]="'/api/img/' + good.main"
-alt=""
+  class="img2"
+  nz-image
+  width="400px"
+  height="400px"
+  [nzSrc]="'/api/img/' + good.main"
+  alt=""
 />
 
 <div class="price">
-    <p>{{ good.name }}</p>
-    <nz-page-header class="site-page-header" [nzTitle]="'价格: ￥：' + good.price">
-    </nz-page-header>
-    <button style="margin-top: 200px" nz-button nzType="primary" nzSize="large" (click)="onPayment()">立即购买</button>
-    <button style="margin-left: 10px;" nz-button nzType="primary" nzSize="large" (click)="onCart()"><i nz-icon nzType="shopping-cart"></i>加入购物车</button>
+  <p>{{ good.name }}</p>
+  <nz-page-header
+    class="site-page-header"
+    [nzTitle]="'价格: ￥：' + good.price"
+  >
+  </nz-page-header>
+  <button
+    style="margin-top: 200px"
+    nz-button
+    nzType="primary"
+    nzSize="large"
+    (click)="onPayment()"
+  >
+    立即购买
+  </button>
+  <button
+    style="margin-left: 10px"
+    nz-button
+    nzType="primary"
+    nzSize="large"
+    (click)="onCart()"
+  >
+    <i nz-icon nzType="shopping-cart"></i>加入购物车
+  </button>
 </div>
 
 <nz-modal
@@ -23,10 +42,32 @@ alt=""
 >
   <ng-container *nzModalContent>
     <img
-    width="400px"
-    height="400px"
-    alt="example"
-    [src]="'/api/img/payment.jpg'"
-  />
+      width="400px"
+      height="400px"
+      alt="example"
+      [src]="'/api/img/payment.jpg'"
+    />
+    <img
+      style="margin-top: 10px"
+      width="400px"
+      height="400px"
+      alt="example"
+      [src]="'/api/img/payment1.jpg'"
+    />
+    <p style="margin-top: 15px">总价：￥ {{ this.good.price }}</p>
+    <p *ngIf="!switchValue" style="margin-top: 15px">
+      送货地址：{{ this.user.address }}
+    </p>
+    <div style="margin-top: 15px">是否自提:<nz-switch style="margin-left: 10px;" [(ngModel)]="switchValue"></nz-switch></div>
+    <p *ngIf="switchValue">自提码：NZ7893</p>
+    <p *ngIf="switchValue">自提点位置：</p>
+    <img
+      *ngIf="switchValue"
+      style="margin-top: 10px"
+      width="400px"
+      height="400px"
+      alt="example"
+      [src]="'/api/img/address.jpg'"
+    />
   </ng-container>
 </nz-modal>

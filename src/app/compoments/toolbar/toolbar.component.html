@@ -18,14 +18,24 @@
     <i nz-icon nzType="shopping-cart"></i>购物车
   </button>
   <button
+    class="shopping-cart"
+    nz-button
+    nzType="primary"
+    nzShape="round"
+    (click)="openAdmin()"
+    *ngIf="isAdmin"
+  >
+    <i nz-icon nzType="lock"></i>管理员
+  </button>
+
+  <button
   class="shopping-cart"
   nz-button
   nzType="primary"
   nzShape="round"
-  (click)="openAdmin()"
-  *ngIf="isAdmin"
+  (click)="openMap()"
 >
-  <i nz-icon nzType="lock"></i>管理员
+  <i nz-icon nzType="border-outer"></i>社区地图
 </button>
 </nz-header>
 <app-shopping-cart [visible]="visible" (close)="close()"></app-shopping-cart>
@@ -47,5 +57,22 @@
     >
       退出
     </button>
+  </ng-container>
+</nz-modal>
+
+
+<nz-modal
+  [(nzVisible)]="isMapVisible"
+  nzTitle="社区地图"
+  (nzOnCancel)="handleMapCancel()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <img
+      width="400px"
+      height="400px"
+      alt="example"
+      [src]="'/api/img/address.jpg'"
+    />
   </ng-container>
 </nz-modal>

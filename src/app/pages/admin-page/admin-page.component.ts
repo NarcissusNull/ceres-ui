@@ -30,7 +30,9 @@ export class AdminPageComponent implements OnInit {
   list!: Goods[];
   isChangeVisible = false;
   orderList!: OrderDto[];
+  OldOrderList!: OrderDto[]
   isNewOrderVisible = false;
+  isOldOrderVisible = false;
 
   AllUser!: User[];
   AllGoods!: Goods[];
@@ -87,6 +89,7 @@ export class AdminPageComponent implements OnInit {
     });
 
     this.httpService.notice().subscribe((data) => (this.orderList = data));
+    this.httpService.oldOrders().subscribe((data) => (this.OldOrderList = data));
     this.httpService
       .allGoodsWithDeleted()
       .subscribe((data) => (this.AllGoods = data));
@@ -108,9 +111,15 @@ export class AdminPageComponent implements OnInit {
   showNewOrderModal() {
     this.isNewOrderVisible = true;
   }
+  showOldOrderModal() {
+    this.isOldOrderVisible = true;
+  }
 
   handleNewOrderCancel() {
     this.isNewOrderVisible = false;
+  }
+  handleOldOrderCancel() {
+    this.isOldOrderVisible = false;
   }
 
   initLoading = true;

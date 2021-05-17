@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Goods from 'src/app/domain/goods.domain';
+import User from 'src/app/domain/user.domain';
 import { HttpService } from 'src/app/service/http.service';
 
 @Component({
@@ -10,10 +11,16 @@ import { HttpService } from 'src/app/service/http.service';
 export class DetailHeaderComponent implements OnInit {
   @Input() good!: Goods;
   isVisible = false;
+  user!: User;
+  switchValue = false;
 
   constructor(private httpService: HttpService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.httpService.queryUser(Number(localStorage.getItem('userId'))).subscribe(
+      data => this.user = data
+    )
+  }
 
   onBuy() {
     let goods: Goods[] = [];

@@ -15,6 +15,11 @@ export class HttpService {
   notice(): Observable<OrderDto[]> {
     return this.httpClient.get<OrderDto[]>('/api/admin/notice/list/' + localStorage.getItem('userId'))
   }
+
+  oldOrders(): Observable<OrderDto[]> {
+    return this.httpClient.get<OrderDto[]>('/api/admin/notice/old/order/list/' + localStorage.getItem('userId'))
+  }
+
   createCart(id: number, user: number) {
     return this.httpClient.get('/api/goods/cart/' + id + '/' + user)
   }
