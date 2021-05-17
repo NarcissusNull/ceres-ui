@@ -67,7 +67,12 @@
   </ng-container>
 </nz-modal>
 <app-add-new-goods style="margin-left: 50px"></app-add-new-goods>
-<button style="margin-left: 50px" nz-button [nzType]="'primary'" (click)="showNewOrderModal()">
+<button
+  style="margin-left: 50px"
+  nz-button
+  [nzType]="'primary'"
+  (click)="showNewOrderModal()"
+>
   <span>查看新订单</span>
 </button>
 
@@ -75,7 +80,6 @@
   [(nzVisible)]="isNewOrderVisible"
   nzTitle="查看新订单"
   (nzOnCancel)="handleNewOrderCancel()"
-  (nzOnOk)="handleNewOrderOk()"
 >
   <ng-container *nzModalContent>
     <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
@@ -86,16 +90,26 @@
               >订单ID：{{ order.id }}</nz-list-item-meta-title
             >
             <nz-list-item-meta-title
-              >所属用户ID：{{ order.user }}</nz-list-item-meta-title
+              >所属用户：{{
+                queryUserName(order.user)
+              }}</nz-list-item-meta-title
             >
             <nz-list-item-meta-title>
-              购买的商品：{{ order.goods }}
+              购买的商品：{{ queryGoods(order.goods) }}
+            </nz-list-item-meta-title>
+            <nz-list-item-meta-title>
+              总价：￥ {{ queryPrice(order.goods) }}
             </nz-list-item-meta-title>
           </nz-list-item-meta>
         </ng-container>
       </nz-list-item>
     </nz-list>
   </ng-container>
+  <div *nzModalFooter>
+    <button nz-button nzType="primary" (click)="handleNewOrderOk()">
+      发货
+    </button>
+  </div>
 </nz-modal>
 
 <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">

@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import Goods from 'src/app/domain/goods.domain';
 import Type from 'src/app/domain/type.domain';
 import OrderDto from 'src/app/domain/order.domain';
+import User from 'src/app/domain/user.domain';
 
 @Component({
   selector: 'app-admin-page',
@@ -21,14 +22,21 @@ export class AdminPageComponent implements OnInit {
   isVisible = false;
   validateForm!: FormGroup;
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
-  constructor(private fb: FormBuilder, private httpService: HttpService, private http: HttpClient) {}
+  constructor(
+    private fb: FormBuilder,
+    public httpService: HttpService,
+    private http: HttpClient
+  ) {}
   list!: Goods[];
   isChangeVisible = false;
   orderList!: OrderDto[];
   isNewOrderVisible = false;
 
+  AllUser!: User[];
+  AllGoods!: Goods[];
+
   changedGoods!: Goods;
- 
+
   addField(e?: MouseEvent): void {
     if (e) {
       e.preventDefault();
@@ -73,16 +81,16 @@ export class AdminPageComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({});
     this.addField();
-    this.httpService.allGoods().subscribe(
-      data => {
-        this.list = data
-        this.initLoading = false
-      }
-    )
+    this.httpService.allGoods().subscribe((data) => {
+      this.list = data;
+      this.initLoading = false;
+    });
 
-    this.httpService.notice().subscribe(
-      data => this.orderList = data
-    )
+    this.httpService.notice().subscribe((data) => (this.orderList = data));
+    this.httpService
+      .allGoodsWithDeleted()
+      .subscribe((data) => (this.AllGoods = data));
+    this.httpService.allUser().subscribe((data) => (this.AllUser = data));
   }
 
   showModal(): void {
@@ -110,23 +118,43 @@ export class AdminPageComponent implements OnInit {
   data: any[] = [];
 
   edit(item: Goods): void {
-    this.changedGoods = item
-    this.isChangeVisible = true
+    this.changedGoods = item;
+    this.isChangeVisible = true;
   }
 
   deleted(item: Goods) {
-    this.http.get('/api/goods/delete/' + item.id).subscribe(data => {
-      alert('删除成功!')
-      location.reload()
-    })
+    this.http.get('/api/goods/delete/' + item.id).subscribe((data) => {
+      alert('删除成功!');
+      location.reload();
+    });
   }
 
   handleNewOrderOk() {
-    this.http.get('/api/admin/notice/clear/' + localStorage.getItem('userId')).subscribe(
-      data => {
-        alert("清除新订单成功！")
+    this.http
+      .get('/api/admin/notice/clear/' + localStorage.getItem('userId'))
+      .subscribe((data) => {
+        alert('发货成功！');
         location.reload();
-      }
-    )
+      });
+  }
+
+  queryUserName(id: number): string {
+    return _.chain(this.AllUser)
+      .filter((user) => user.id === id)
+      .value()[0].name;
+  }
+
+  queryGoods(id: number[]): string[] {
+    return _.chain(this.AllGoods)
+      .filter((goods) => id.indexOf(goods.id) != -1)
+      .map((goods) => goods.name)
+      .value();
+  }
+
+  queryPrice(id: number[]): number {
+    return _.chain(this.AllGoods)
+      .filter((goods) => id.indexOf(goods.id) != -1)
+      .reduce((prev, curr, index, list) => prev + curr.price, 0)
+      .value();
   }
 }

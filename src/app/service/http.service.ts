@@ -22,7 +22,7 @@ export class HttpService {
   changeGoods(goods: any) {
     return this.httpClient.post('/api/goods/update/', goods)
   }
-  queryUser(id: number) {
+  queryUser(id: number): Observable<User> {
     return this.httpClient.get<User>('api/user/' + id);
   }
   createOrder(goods: Goods[]) {
@@ -79,4 +79,19 @@ export class HttpService {
     return this.httpClient.get<Goods[]>('/api/goods/search')
   }
 
+  allGoodsWithDeleted(): Observable<Goods[]> {
+    return this.httpClient.get<Goods[]>('/api/goods/search/all')
+  }
+
+  allUser(): Observable<User[]> {
+    return this.httpClient.get<User[]>('/api/user/all')
+  }
+
+  queryGoodsDetailForIds(ids: number[]): Observable<string[]>{
+    return this.httpClient.post<string[]>('/api/goods/queryNames', ids)
+  }
+
+  queryGoodsTotalPrice(ids: number[]): Observable<number> {
+    return this.httpClient.post<number>('/api/goods/total', ids)
+  }
 }
