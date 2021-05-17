@@ -6,10 +6,12 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ProductDetailPageComponent } from './pages/product-detail-page/product-detail-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { TypePageComponent } from './pages/type-page/type-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'search/:value', component: SearchPageComponent },
+  { path: 'type/:value', component: TypePageComponent},
   { path: 'detail/:id', component: ProductDetailPageComponent},
   { path: 'admin', component: AdminPageComponent},
   { path: 'login', component: LoginPageComponent},

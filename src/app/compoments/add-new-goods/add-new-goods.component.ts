@@ -55,6 +55,8 @@ export class AddNewGoodsComponent implements OnInit {
       .map((file) => file.name)
       .value();
 
+      console.log(this.validateForm.value)
+
     this.httpService
       .createGoods({
         ...this.validateForm.value,

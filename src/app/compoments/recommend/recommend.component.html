@@ -1,7 +1,7 @@
 <nz-layout class="inner-layout">
   <nz-sider nzWidth="200px" nzTheme="light">
     <ul nz-menu nzMode="vertical" class="sider-menu">
-      <li nz-submenu *ngFor="let type of types" [nzTitle]="type.name" nzIcon="bars"></li>
+      <li (click)="openType(type.id)" nz-submenu *ngFor="let type of types" [nzTitle]="type.name" nzIcon="bars"></li>
     </ul>
   </nz-sider>
   <nz-carousel class="inner-content" nzAutoPlay>

@@ -30,6 +30,7 @@ import { AddNewGoodsComponent } from './compoments/add-new-goods/add-new-goods.c
 import { OrderConfirmComponent } from './compoments/order-confirm/order-confirm.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { ChangeProductComponent } from './compoments/change-product/change-product.component';
+import { TypePageComponent } from './pages/type-page/type-page.component';
 
 registerLocaleData(zh);
 
@@ -55,6 +56,7 @@ registerLocaleData(zh);
     OrderConfirmComponent,
     SignUpPageComponent,
     ChangeProductComponent,
+    TypePageComponent,
   ],
   imports: [
     BrowserModule,

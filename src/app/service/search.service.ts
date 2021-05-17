@@ -8,19 +8,26 @@ import Goods from '../domain/goods.domain';
 })
 export class SearchService {
   setValue(value: string) {
-    this.value = value
+    this.value = value;
   }
-  value!: string
+  setTypeValue(value: number) {
+    this.typeId = value;
+  }
+  value!: string;
+  typeId!: number;
   constructor(private httpClient: HttpClient) {}
   getRecommand(): string {
     return 'search';
   }
 
   getValue() {
-    return this.value
+    return this.value;
   }
 
   search(): Observable<Goods[]> {
     return this.httpClient.get<Goods[]>('/api/goods/search/' + this.value);
+  }
+  type(): Observable<Goods[]> {
+    return this.httpClient.get<Goods[]>('/api/goods/type/' + this.typeId);
   }
 }
