@@ -11,9 +11,14 @@
   <p>{{ good.name }}</p>
   <nz-page-header
     class="site-page-header"
-    [nzTitle]="'价格: ￥：' + good.price"
+    [nzTitle]="'价格: ￥：' + good.price * good.rate"
   >
   </nz-page-header>
+  <p style="margin-left: 20px">
+    <nz-tag #rate *ngIf="good.rate != 1.0" [nzColor]="'blue'"
+      >特价 原价：￥：{{ good.price }}</nz-tag
+    >
+  </p>
   <button
     style="margin-top: 200px"
     nz-button
@@ -35,6 +40,7 @@
 </div>
 
 <nz-modal
+  nzWidth="1000"
   [(nzVisible)]="isVisible"
   nzTitle="付款"
   (nzOnCancel)="handleCancel()"
@@ -54,18 +60,28 @@
       alt="example"
       [src]="'/api/img/payment1.jpg'"
     />
-    <p style="margin-top: 15px">总价：￥ {{ this.good.price }}</p>
+    <p style="margin-top: 15px">
+      总价：￥ {{ this.good.price * this.good.rate }}
+      <nz-tag #rate *ngIf="good.rate != 1.0" [nzColor]="'blue'"
+        >特价 原价：￥：{{ good.price }}</nz-tag
+      >
+    </p>
     <p *ngIf="!switchValue" style="margin-top: 15px">
       送货地址：{{ this.user.address }}
     </p>
-    <div style="margin-top: 15px">是否自提:<nz-switch style="margin-left: 10px;" [(ngModel)]="switchValue"></nz-switch></div>
+    <div style="margin-top: 15px">
+      是否自提:<nz-switch
+        style="margin-left: 10px"
+        [(ngModel)]="switchValue"
+      ></nz-switch>
+    </div>
     <p *ngIf="switchValue">自提码：NZ7893</p>
     <p *ngIf="switchValue">自提点位置：</p>
     <img
       *ngIf="switchValue"
       style="margin-top: 10px"
-      width="400px"
-      height="400px"
+      width="1280px"
+      height="720px"
       alt="example"
       [src]="'/api/img/address.jpg'"
     />

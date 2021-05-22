@@ -5,6 +5,7 @@ interface Goods {
     price: number
     type: number;
     describe: string;
+    rate: number;
 }
 
 export default Goods;

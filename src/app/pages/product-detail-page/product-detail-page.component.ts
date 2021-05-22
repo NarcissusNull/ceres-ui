@@ -14,7 +14,8 @@ export class ProductDetailPageComponent implements OnInit {
 
   constructor(
     private httpService: HttpService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private r: Router
   ) {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.httpService
@@ -24,5 +25,9 @@ export class ProductDetailPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  backHome() {
+    this.r.navigateByUrl("/home")
   }
 }

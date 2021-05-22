@@ -1,2 +1,9 @@
 <app-detail-header *ngIf="good !== null && good !== undefined" [good]="good"></app-detail-header>
 <app-detail-content *ngIf="good !== null && good !== undefined" [good]="good"></app-detail-content>
+
+<nz-back-top [nzTemplate]="tpl" nzVisibilityHeight="-1" (nzClick)="backHome()">
+    <ng-template #tpl>
+      <div class="ant-back-top-inner">home</div>
+    </ng-template>
+  </nz-back-top>
+  
