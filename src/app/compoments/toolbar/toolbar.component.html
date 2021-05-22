@@ -57,6 +57,41 @@
     >
       退出
     </button>
+    <button
+  style="margin-left: 50px"
+  nz-button
+  [nzType]="'primary'"
+  (click)="showOldOrderModal()"
+>
+  <span>查看个人订单</span>
+</button>
+  </ng-container>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="isOldOrderVisible"
+  nzTitle="查看个人订单"
+  (nzOnCancel)="handleOldOrderCancel()"
+  (nzOnOk)="handleOldOrderCancel()"
+>
+  <ng-container *nzModalContent>
+    <nz-list class="demo-loadmore-list">
+      <nz-list-item *ngFor="let order of OldOrderList">
+        <ng-container>
+          <nz-list-item-meta>
+            <nz-list-item-meta-title
+              >订单ID：{{ order.id }}</nz-list-item-meta-title
+            >
+            <nz-list-item-meta-title>
+              购买的商品：{{ queryGoods(order.goods) }}
+            </nz-list-item-meta-title>
+            <nz-list-item-meta-title>
+              总价：￥ {{ queryPrice(order.goods) }}
+            </nz-list-item-meta-title>
+          </nz-list-item-meta>
+        </ng-container>
+      </nz-list-item>
+    </nz-list>
   </ng-container>
 </nz-modal>
 

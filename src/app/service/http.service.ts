@@ -12,28 +12,40 @@ import User from '../domain/user.domain';
   providedIn: 'root',
 })
 export class HttpService {
+  MyOrders(): Observable<OrderDto[]> {
+    return this.httpClient.get<OrderDto[]>(
+      '/api/admin/notice/my/order/list/' + localStorage.getItem('userId')
+    );
+  }
   notice(): Observable<OrderDto[]> {
-    return this.httpClient.get<OrderDto[]>('/api/admin/notice/list/' + localStorage.getItem('userId'))
+    return this.httpClient.get<OrderDto[]>(
+      '/api/admin/notice/list/' + localStorage.getItem('userId')
+    );
   }
 
   oldOrders(): Observable<OrderDto[]> {
-    return this.httpClient.get<OrderDto[]>('/api/admin/notice/old/order/list/' + localStorage.getItem('userId'))
+    return this.httpClient.get<OrderDto[]>(
+      '/api/admin/notice/old/order/list/' + localStorage.getItem('userId')
+    );
   }
 
   createCart(id: number, user: number) {
-    return this.httpClient.get('/api/goods/cart/' + id + '/' + user)
+    return this.httpClient.get('/api/goods/cart/' + id + '/' + user);
   }
 
   changeGoods(goods: any) {
-    return this.httpClient.post('/api/goods/update/', goods)
+    return this.httpClient.post('/api/goods/update/', goods);
   }
   queryUser(id: number): Observable<User> {
     return this.httpClient.get<User>('api/user/' + id);
   }
   createOrder(goods: Goods[]) {
-    let user = Number(localStorage.getItem('userId'))
-    let goodsIds = _.map(goods, goods => goods.id)
-    return this.httpClient.post<orderDto>('/api/order/create', {user: user, goods: goodsIds})
+    let user = Number(localStorage.getItem('userId'));
+    let goodsIds = _.map(goods, (goods) => goods.id);
+    return this.httpClient.post<orderDto>('/api/order/create', {
+      user: user,
+      goods: goodsIds,
+    });
   }
 
   constructor(private httpClient: HttpClient) {}
@@ -42,7 +54,7 @@ export class HttpService {
 
   createTypes(types: String[]) {
     this.httpClient.post('/api/admin/types', types).subscribe();
-    alert('创建新分类成功')
+    alert('创建新分类成功');
   }
 
   queryTypes(): Observable<Type[]> {
@@ -72,7 +84,7 @@ export class HttpService {
     return this.httpClient.post<User>('/api/user/signup', {
       name: name,
       password: password,
-      address: address
+      address: address,
     });
   }
 
@@ -81,22 +93,22 @@ export class HttpService {
   }
 
   allGoods(): Observable<Goods[]> {
-    return this.httpClient.get<Goods[]>('/api/goods/search')
+    return this.httpClient.get<Goods[]>('/api/goods/search');
   }
 
   allGoodsWithDeleted(): Observable<Goods[]> {
-    return this.httpClient.get<Goods[]>('/api/goods/search/all')
+    return this.httpClient.get<Goods[]>('/api/goods/search/all');
   }
 
   allUser(): Observable<User[]> {
-    return this.httpClient.get<User[]>('/api/user/all')
+    return this.httpClient.get<User[]>('/api/user/all');
   }
 
-  queryGoodsDetailForIds(ids: number[]): Observable<string[]>{
-    return this.httpClient.post<string[]>('/api/goods/queryNames', ids)
+  queryGoodsDetailForIds(ids: number[]): Observable<string[]> {
+    return this.httpClient.post<string[]>('/api/goods/queryNames', ids);
   }
 
   queryGoodsTotalPrice(ids: number[]): Observable<number> {
-    return this.httpClient.post<number>('/api/goods/total', ids)
+    return this.httpClient.post<number>('/api/goods/total', ids);
   }
 }
