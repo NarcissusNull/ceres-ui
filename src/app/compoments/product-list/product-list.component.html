@@ -5,7 +5,7 @@
       <nz-card-meta
         style="height: 40px"
         [nzTitle]="good.name"
-        [nzDescription]="'￥：' + good.price.toString()"
+        [nzDescription]="'￥：' + good.price * good.rate"
       ></nz-card-meta>
     </nz-card>
     <ng-template #coverTemplate>

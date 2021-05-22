@@ -91,7 +91,7 @@ export class ToolbarComponent implements OnInit {
   queryPrice(id: number[]): number {
     return _.chain(this.AllGoods)
       .filter((goods) => id.indexOf(goods.id) != -1)
-      .reduce((prev, curr, index, list) => prev + curr.price, 0)
+      .reduce((prev, curr, index, list) => prev + curr.price * curr.rate, 0)
       .value();
   }
 }

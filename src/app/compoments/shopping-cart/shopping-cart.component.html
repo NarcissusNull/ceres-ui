@@ -14,7 +14,12 @@
           {{ item.name }}
         </nz-list-item-meta-title>
         <nz-list-item-meta-description>
-          <p>￥：{{ item.price }}</p>
+          <p>
+            ￥：{{ item.price * item.rate }}
+            <nz-tag #rate *ngIf="item.rate != 1.0" [nzColor]="'blue'"
+              >特价 原价：￥：{{ item.price }}</nz-tag
+            >
+          </p>
         </nz-list-item-meta-description>
       </nz-list-item-meta>
       <ul nz-list-item-actions>
@@ -49,6 +54,50 @@
     <button nz-button style="margin-right: 8px" (click)="onClose()">
       取消
     </button>
-    <button nz-button nzType="primary" (click)="onBuy()">购买</button>
+    <button nz-button nzType="primary" (click)="onPayment()">购买</button>
   </div>
 </ng-template>
+
+<nz-modal
+  nzWidth="1000"
+  [(nzVisible)]="isPaymentVisible"
+  nzTitle="付款"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>
+    <img
+      width="400px"
+      height="400px"
+      alt="example"
+      [src]="'/api/img/payment.jpg'"
+    />
+    <img
+      style="margin-top: 10px"
+      width="400px"
+      height="400px"
+      alt="example"
+      [src]="'/api/img/payment1.jpg'"
+    />
+    <p style="margin-top: 15px">总价：￥ {{ this.total }}</p>
+    <p *ngIf="!switchValue" style="margin-top: 15px">
+      送货地址：{{ this.user.address }}
+    </p>
+    <div style="margin-top: 15px">
+      是否自提:<nz-switch
+        style="margin-left: 10px"
+        [(ngModel)]="switchValue"
+      ></nz-switch>
+    </div>
+    <p *ngIf="switchValue">自提码：NX783</p>
+    <p *ngIf="switchValue">自提点位置：</p>
+    <img
+      *ngIf="switchValue"
+      style="margin-top: 10px"
+      width="1280px"
+      height="720px"
+      alt="example"
+      [src]="'/api/img/address.jpg'"
+    />
+  </ng-container>
+</nz-modal>

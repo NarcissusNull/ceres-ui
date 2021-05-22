@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import Goods from 'src/app/domain/goods.domain';
 import { HttpService } from 'src/app/service/http.service';
 import * as _ from 'lodash';
+import User from 'src/app/domain/user.domain';
 const count = 5;
 const fakeDataUrl =
   'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
@@ -27,6 +28,10 @@ export class ShoppingCartComponent implements OnInit {
   close: EventEmitter<void> = new EventEmitter<void>();
 
   total = 0;
+  switchValue = false;
+  isPaymentVisible = false;
+
+  user!: User;
 
   constructor(
     private http: HttpClient,
@@ -40,6 +45,9 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+    this.httpService
+      .queryUser(Number(localStorage.getItem('userId')))
+      .subscribe((data) => (this.user = data));
   }
 
   increase(): void {
@@ -66,7 +74,7 @@ export class ShoppingCartComponent implements OnInit {
       .subscribe((data) => {
         this.data = data;
         let price = 0;
-        _.forEach(data, (g) => (price += g.price));
+        _.forEach(data, (g) => (price += g.price * g.rate));
         this.total = price;
       });
   }
@@ -90,5 +98,18 @@ export class ShoppingCartComponent implements OnInit {
         alert('删除成功');
         location.reload();
       });
+  }
+
+  handleCancel() {
+    this.isPaymentVisible = false;
+  }
+
+  handleOk() {
+    this.isPaymentVisible = false;
+    this.onBuy();
+  }
+
+  onPayment() {
+    this.isPaymentVisible = true;
   }
 }

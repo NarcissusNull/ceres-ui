@@ -161,7 +161,7 @@
           <a [routerLink]="'/detail/' + item.id">{{ item.name }}</a>
         </nz-list-item-meta-title>
       </nz-list-item-meta>
-      {{ "价格: ￥：" + item.price }}
+      {{ "价格: ￥：" + item.price * item.rate }}
       <ul nz-list-item-actions>
         <nz-list-item-action
           ><a (click)="edit(item)">编辑</a></nz-list-item-action
