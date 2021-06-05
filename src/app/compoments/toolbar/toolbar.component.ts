@@ -5,6 +5,7 @@ import OrderDto from 'src/app/domain/order.domain';
 import User from 'src/app/domain/user.domain';
 import { HttpService } from 'src/app/service/http.service';
 import * as _ from 'lodash';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,8 +22,14 @@ export class ToolbarComponent implements OnInit {
   OldOrderList!: OrderDto[];
   AllUser!: User[];
   AllGoods!: Goods[];
+  isChangeUserInfoVisible = false;
+  validateForm!: FormGroup;
 
-  constructor(private httpService: HttpService, private route: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private httpService: HttpService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     this.httpService
@@ -32,6 +39,12 @@ export class ToolbarComponent implements OnInit {
     this.httpService
       .allGoodsWithDeleted()
       .subscribe((data) => (this.AllGoods = data));
+
+    this.validateForm = this.fb.group({
+      name: [null],
+      password: [null],
+      address: [null],
+    });
   }
   open(): void {
     this.visible = true;
@@ -44,7 +57,13 @@ export class ToolbarComponent implements OnInit {
   handleCancel() {
     this.isUserInfoVisible = false;
   }
+  handleChangeUserInfoCancel() {
+    this.isChangeUserInfoVisible = false;
+  }
 
+  showChangeUserInfoModal() {
+    this.isChangeUserInfoVisible = true;
+  }
   openUserInfo(): void {
     const userID = localStorage.getItem('userId');
     if (userID !== null) {
@@ -93,5 +112,19 @@ export class ToolbarComponent implements OnInit {
       .filter((goods) => id.indexOf(goods.id) != -1)
       .reduce((prev, curr, index, list) => prev + curr.price * curr.rate, 0)
       .value();
+  }
+
+  changeUserInfo() {
+    console.log(this.validateForm.value);
+    this.httpService
+      .changeUserInfo({
+        ...this.validateForm.value,
+        id: this.user.id,
+      })
+      .subscribe((data) => {
+        alert("修改用户信息成功，需要重新登录！")
+        this.onLogout();
+        this.route.navigateByUrl('/login');
+      });
   }
 }

@@ -36,6 +36,9 @@ export class HttpService {
   changeGoods(goods: any) {
     return this.httpClient.post('/api/goods/update/', goods);
   }
+  changeUserInfo(user: any) {
+    return this.httpClient.post('/api/user/changeUserInfo/', user);
+  }
   queryUser(id: number): Observable<User> {
     return this.httpClient.get<User>('api/user/' + id);
   }

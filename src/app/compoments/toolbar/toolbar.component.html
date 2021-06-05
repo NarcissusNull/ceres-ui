@@ -58,13 +58,21 @@
       退出
     </button>
     <button
-  style="margin-left: 50px"
-  nz-button
-  [nzType]="'primary'"
-  (click)="showOldOrderModal()"
->
-  <span>查看个人订单</span>
-</button>
+      style="margin-left: 50px"
+      nz-button
+      [nzType]="'primary'"
+      (click)="showOldOrderModal()"
+    >
+      <span>查看个人订单</span>
+    </button>
+    <button
+      style="margin-left: 50px"
+      nz-button
+      [nzType]="'primary'"
+      (click)="showChangeUserInfoModal()"
+    >
+      <span>修改个人信息</span>
+    </button>
   </ng-container>
 </nz-modal>
 
@@ -109,5 +117,40 @@
       alt="example"
       [src]="'/api/img/address.jpg'"
     />
+  </ng-container>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="isChangeUserInfoVisible"
+  nzTitle="修改用户信息"
+  [nzFooter]="null"
+  (nzOnCancel)="handleChangeUserInfoCancel()"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="changeUserInfo()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired nzFor="name">用户名</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="请填写新用户名">
+          <input  id="name" type="text" [placeholder]="user.name" nz-input formControlName="name"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired nzFor="password">密码</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="请填写新密码">
+          <input id="password" type="password" [placeholder]="user.password" nz-input formControlName="password" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired nzFor="address">地址</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="请填写新地址">
+          <input id="address" type="address" [placeholder]="user.address" nz-input formControlName="address" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzSpan]="12" [nzOffset]="5">
+          <button nz-button nzType="primary">修改</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
   </ng-container>
 </nz-modal>
