@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import Goods from 'src/app/domain/goods.domain';
+import Type from 'src/app/domain/type.domain';
 import User from 'src/app/domain/user.domain';
 import { HttpService } from 'src/app/service/http.service';
 
@@ -13,6 +15,8 @@ export class DetailHeaderComponent implements OnInit {
   isVisible = false;
   user!: User;
   switchValue = false;
+  types: Type[] = [];
+  typename!: string;
 
   constructor(private httpService: HttpService) {}
 
@@ -20,6 +24,11 @@ export class DetailHeaderComponent implements OnInit {
     this.httpService.queryUser(Number(localStorage.getItem('userId'))).subscribe(
       data => this.user = data
     )
+
+    this.httpService.queryTypes().subscribe((data) => {
+      this.types = data;
+      this.typename = this.queryType(this.good.id)
+    })
   }
 
   onBuy() {
@@ -52,5 +61,11 @@ export class DetailHeaderComponent implements OnInit {
 
   onPayment() {
     this.isVisible = true;
+  }
+
+  queryType(id: number): string {
+    return _.chain(this.types)
+      .filter((user) => user.id === id)
+      .value()[0].name;
   }
 }

@@ -9,6 +9,7 @@
 
 <div class="price">
   <p>{{ good.name }}</p>
+  <nz-tag [nzColor]="'blue'">分类：{{ this.typename }}</nz-tag>
   <nz-page-header
     class="site-page-header"
     [nzTitle]="'价格: ￥：' + good.price * good.rate"
