@@ -8,7 +8,7 @@
   [nzFooter]="footerTpl"
 >
   <nz-list nzItemLayout="vertical">
-    <nz-list-item *ngFor="let item of data">
+    <nz-list-item *ngFor="let item of percent; let index = index">
       <nz-list-item-meta>
         <nz-list-item-meta-title>
           {{ item.name }}
@@ -23,11 +23,23 @@
         </nz-list-item-meta-description>
       </nz-list-item-meta>
       <ul nz-list-item-actions>
-        <!-- <nz-list-item-action>    <nz-button-group>
-          <button nz-button (click)="decline()"><i nz-icon nzType="minus"></i></button>
-          <input width="100" type="text" nz-input [maxLength]="2" disabled/>
-          <button nz-button (click)="increase()"><i nz-icon nzType="plus"></i></button>
-        </nz-button-group></nz-list-item-action> -->
+        <nz-list-item-action>
+          <nz-button-group>
+            <button nz-button (click)="decline(index)">
+              <i nz-icon nzType="minus"></i>
+            </button>
+            <input
+              width="100"
+              type="text"
+              nz-input
+              [maxLength]="2"
+              disabled
+              [value]="item.percent"
+            />
+            <button nz-button (click)="increase(index)">
+              <i nz-icon nzType="plus"></i>
+            </button> </nz-button-group
+        ></nz-list-item-action>
         <nz-list-item-action
           ><i
             nz-icon

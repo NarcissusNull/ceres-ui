@@ -41,27 +41,42 @@ export class ShoppingCartComponent implements OnInit {
 
   data: Goods[] = [];
   list: Array<{ loading: boolean; name: any }> = [];
-  percent = 0;
+  percent: any[] = [];
 
   ngOnInit(): void {
     this.loadData();
     this.httpService
       .queryUser(Number(localStorage.getItem('userId')))
-      .subscribe((data) => (this.user = data));
+      .subscribe((data) => {
+        this.user = data;
+
+      });
   }
 
-  increase(): void {
-    this.percent = this.percent + 10;
-    if (this.percent > 100) {
-      this.percent = 100;
+  increase(index: any): void {
+    console.log(index)
+    console.log(this.percent[index])
+    this.percent[index].percent = this.percent[index].percent + 1;
+    if (this.percent[index].percent > 100) {
+      this.percent[index].percent = 100;
     }
+    let price = 0;
+    _.forEach(this.percent, (g) => (price += g.price * g.rate * g.percent));
+    this.total = price
   }
 
-  decline(): void {
-    this.percent = this.percent - 10;
-    if (this.percent < 0) {
-      this.percent = 0;
+  decline(index: any): void {
+    this.percent[index].percent = this.percent[index].percent - 1;
+    if (this.percent[index].percent < 1) {
+      this.percent[index].percent = 1;
     }
+    let price = 0;
+    _.forEach(this.percent, (g) => (price += g.price * g.rate * g.percent));
+    this.total = price
+  }
+
+  getPr(index: number) {
+    return this.percent[index];
   }
 
   onClose(): void {
@@ -73,9 +88,13 @@ export class ShoppingCartComponent implements OnInit {
       .get<Goods[]>('/api/goods/cart/search/' + localStorage.getItem('userId'))
       .subscribe((data) => {
         this.data = data;
+;
+        this.percent = _.map(this.data, (d) => {
+          return { ...d, percent: 1 };
+        });
         let price = 0;
-        _.forEach(data, (g) => (price += g.price * g.rate));
-        this.total = price;
+        _.forEach(this.percent, (g) => (price += g.price * g.rate * g.percent));
+        this.total = price
       });
   }
 
