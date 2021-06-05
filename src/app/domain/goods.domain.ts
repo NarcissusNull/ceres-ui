@@ -6,6 +6,7 @@ interface Goods {
     type: number;
     describe: string;
     rate: number;
+    size: string;
 }
 
 export default Goods;

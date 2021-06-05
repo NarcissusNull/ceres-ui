@@ -27,7 +27,8 @@ export class ChangeProductComponent implements OnInit {
       name: [null],
       price: [null],
       type: [null],
-      rate: [null]
+      rate: [null],
+      size: [null]
     });
 
     this.httpService.queryTypes().subscribe((data) => {

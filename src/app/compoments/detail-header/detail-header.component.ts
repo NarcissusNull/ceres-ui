@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as _ from 'lodash';
 import Goods from 'src/app/domain/goods.domain';
 import Type from 'src/app/domain/type.domain';
@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/service/http.service';
   templateUrl: './detail-header.component.html',
   styleUrls: ['./detail-header.component.css'],
 })
-export class DetailHeaderComponent implements OnInit {
+export class DetailHeaderComponent implements OnInit, OnChanges{
   @Input() good!: Goods;
   isVisible = false;
   user!: User;
@@ -19,6 +19,12 @@ export class DetailHeaderComponent implements OnInit {
   typename!: string;
 
   constructor(private httpService: HttpService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.httpService.queryTypes().subscribe((data) => {
+      this.types = data;
+      this.typename = this.queryType(this.good.type)
+    })
+  }
 
   ngOnInit(): void {
     this.httpService.queryUser(Number(localStorage.getItem('userId'))).subscribe(
@@ -27,7 +33,7 @@ export class DetailHeaderComponent implements OnInit {
 
     this.httpService.queryTypes().subscribe((data) => {
       this.types = data;
-      this.typename = this.queryType(this.good.id)
+      this.typename = this.queryType(this.good.type)
     })
   }
 

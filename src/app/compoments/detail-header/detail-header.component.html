@@ -12,12 +12,12 @@
   <nz-tag [nzColor]="'blue'">分类：{{ this.typename }}</nz-tag>
   <nz-page-header
     class="site-page-header"
-    [nzTitle]="'价格: ￥：' + good.price * good.rate"
+    [nzTitle]="'价格: ￥：' + good.price * good.rate + '/' + good.size"
   >
   </nz-page-header>
   <p style="margin-left: 20px">
     <nz-tag #rate *ngIf="good.rate != 1.0" [nzColor]="'blue'"
-      >特价 原价：￥：{{ good.price }}</nz-tag
+      >特价 原价：￥：{{ good.price }} /{{ good.size }}</nz-tag
     >
   </p>
   <button

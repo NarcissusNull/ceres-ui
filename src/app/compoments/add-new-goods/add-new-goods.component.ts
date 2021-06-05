@@ -29,6 +29,7 @@ export class AddNewGoodsComponent implements OnInit {
       name: [null, [Validators.required]],
       price: [null, [Validators.required]],
       type: [null, [Validators.required]],
+      size: [null, [Validators.required]],
     });
 
     this.httpService.queryTypes().subscribe((data) => {
