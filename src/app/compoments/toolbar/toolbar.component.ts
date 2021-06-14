@@ -100,11 +100,15 @@ export class ToolbarComponent implements OnInit {
     this.isOldOrderVisible = false;
   }
 
-  queryGoods(id: number[]): string[] {
-    return _.chain(this.AllGoods)
+  queryGoods(id: number[], nums: number[]): string[] {
+    let e = _.chain(this.AllGoods)
       .filter((goods) => id.indexOf(goods.id) != -1)
       .map((goods) => goods.name)
       .value();
+      for(let i = 0; i < e.length; i++) {
+        e[i] = e[i] + ' × ' + nums[i]
+      }
+      return e;
   }
 
   queryPrice(id: number[]): number {

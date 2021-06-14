@@ -40,7 +40,8 @@ export class DetailHeaderComponent implements OnInit, OnChanges{
   onBuy() {
     let goods: Goods[] = [];
     goods.push(this.good);
-    this.httpService.createOrder(goods).subscribe((data) => {
+    let n = [1]
+    this.httpService.createOrder(goods, n).subscribe((data) => {
       if (data.id) {
         alert('购买成功！');
       }

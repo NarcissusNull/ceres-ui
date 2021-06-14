@@ -42,12 +42,13 @@ export class HttpService {
   queryUser(id: number): Observable<User> {
     return this.httpClient.get<User>('api/user/' + id);
   }
-  createOrder(goods: Goods[]) {
+  createOrder(goods: Goods[], nums: number[]) {
     let user = Number(localStorage.getItem('userId'));
     let goodsIds = _.map(goods, (goods) => goods.id);
     return this.httpClient.post<orderDto>('/api/order/create', {
       user: user,
       goods: goodsIds,
+      nums: nums
     });
   }
 

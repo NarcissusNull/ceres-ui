@@ -91,7 +91,7 @@
               >订单ID：{{ order.id }}</nz-list-item-meta-title
             >
             <nz-list-item-meta-title>
-              购买的商品：{{ queryGoods(order.goods) }}
+              购买的商品：{{ queryGoods(order.goods, order.nums) }}
             </nz-list-item-meta-title>
             <nz-list-item-meta-title>
               总价：￥ {{ queryPrice(order.goods) }}

@@ -99,7 +99,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   onBuy() {
-    this.httpService.createOrder(this.data).subscribe((data) => {
+    this.httpService.createOrder(this.data,_.map(this.percent, p => p["percent"])).subscribe((data) => {
       if (data.id) {
         alert('购买成功！');
       }
